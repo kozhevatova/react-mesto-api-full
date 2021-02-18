@@ -1,0 +1,29 @@
+.login__submit-button {
+  min-height: 50px;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+  box-shadow: none;
+  border: none;
+  border-radius: 2px;
+  background-color: #fff;
+  margin: 52% 0 0 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.6s linear;
+}
+
+.login__submit-button:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .login__submit-button {
+    margin-top: 40.625vw;
+    min-height: 46px;
+    font-size: 16px;
+  }
+}

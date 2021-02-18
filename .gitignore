@@ -8,6 +8,7 @@ node_modules
 
 # Optional npm cache directory
 .npm
+.eslintcache
 
 # Optional REPL history
 .DS_Store

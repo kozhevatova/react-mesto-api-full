@@ -1,0 +1,22 @@
+.header__email {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #fff;
+  margin: 0 1.875vw 0 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .header__email {
+    margin: 0 2.34vw 0 0;
+  }
+}
+
+@media screen and (min-width: 720px) and (max-width: 1023px) {
+  .header__email {
+    margin: 0 3.33vw 0 0;
+  }
+}

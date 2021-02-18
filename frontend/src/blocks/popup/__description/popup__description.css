@@ -1,0 +1,26 @@
+.popup__description {
+    width: 100%;
+    min-height: 27.26px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (min-width:320px) and (max-width:480px) {
+    .popup__description {
+        font-size: 12px;
+        line-height: 1.25;
+        min-height: 24px;
+        /* margin: 6.25vw 0 11.25vw; */
+    }
+}

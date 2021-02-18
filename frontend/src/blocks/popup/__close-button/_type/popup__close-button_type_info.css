@@ -1,0 +1,10 @@
+.popup__close-button_type_info {
+  background: center/47px 47px url('../../../../images/closeButtonWhite.svg') no-repeat;
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .popup__close-button_type_info {
+    top: -55px;
+    left: 122px;
+  }
+}

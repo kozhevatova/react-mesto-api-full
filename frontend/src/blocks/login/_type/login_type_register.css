@@ -1,0 +1,9 @@
+.login_type_register {
+  margin: 4.68vw auto 8.75vw;
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .login_type_register {
+    margin: 12.5vw auto;
+  }
+}

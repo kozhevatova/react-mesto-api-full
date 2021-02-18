@@ -1,0 +1,23 @@
+.login__input {
+  min-height: 27px;
+  margin: 0 0 3.4% 0;
+  padding: 0 0 13px 0;
+  box-sizing: border-box;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #ccc;
+  background-color: transparent;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #ccc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .login__input {
+    margin-bottom: 13.44vw;
+  }
+}
