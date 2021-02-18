@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "express-mesto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "eslint": "eslint ./app.js",
+    "eslintFix": "eslint ./app.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kozhevatova/express-mesto.git"
+  },
+  "author": "Anna Kozhevatova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kozhevatova/express-mesto/issues"
+  },
+  "homepage": "https://github.com/kozhevatova/express-mesto#readme",
+  "devDependencies": {
+    "eslint": "^7.16.0",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^13.0.4",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.5",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.12",
+    "validator": "^13.5.2",
+    "winston": "^3.3.3"
+  }
+}
