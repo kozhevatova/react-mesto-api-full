@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "express-mesto",
   "version": "1.0.0",
   "description": "express-mesto",
   "main": "index.js",
