@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcryptjs');
 const isEmail = require('validator/lib/isEmail');
 
@@ -57,5 +58,7 @@ userSchema.statics.findUserByCredentials = function (email, password) {
         });
     });
 };
+
+userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('user', userSchema);

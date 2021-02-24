@@ -23,7 +23,6 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getUserById = (req, res, next) => {
-  // if (mongoose.Types.ObjectId.isValid) {
   // if (req.params.userId !== 'me') {
   User.findById(req.params.userId)
     .orFail(() => handleIdNotFound())

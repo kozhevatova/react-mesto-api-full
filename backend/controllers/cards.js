@@ -1,7 +1,7 @@
 const Card = require('../models/card');
-const NotAuthorizedError = require('../errors/not-auth-err');
 const BadRequestError = require('../errors/bad-req-err');
 const NotFoundError = require('../errors/not-found-err');
+const NotAllowedError = require('../errors/not-allowed-err');
 
 const handleError = (err) => {
   if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -35,7 +35,7 @@ module.exports.deleteCard = (req, res, next) => {
     // eslint-disable-next-line consistent-return
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
-        throw new NotAuthorizedError('Нет прав на удаление карточки');
+        throw new NotAllowedError('Нет прав на удаление карточки');
       }
       Card.findByIdAndRemove(req.params.cardId)
         .then((deletedCard) => res.send({ data: deletedCard }))
