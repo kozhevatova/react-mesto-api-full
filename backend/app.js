@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
@@ -20,9 +21,10 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
+app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
-console.log('backend');
+
 // логгер запросов
 app.use(requestLogger);
 
