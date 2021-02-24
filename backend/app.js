@@ -28,10 +28,6 @@ app.use(bodyParser.json());
 // логгер запросов
 app.use(requestLogger);
 
-app.use((req, res, next) => {
-  console.log('start');
-  next();
-});
 // роуты
 app.post('/signin', celebrate({
   body: Joi.object().keys({
