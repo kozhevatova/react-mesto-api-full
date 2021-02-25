@@ -59,6 +59,6 @@ userSchema.statics.findUserByCredentials = function (email, password) {
     });
 };
 
-userSchema.plugin(uniqueValidator);
+// userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('user', userSchema);
