@@ -112,7 +112,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://api.annakin.students.nomoreparties.space',
+  baseUrl: 'https://api.annakin.students.nomoreparties.space',
 });
 
 export default api;

@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.annakin.students.nomoreparties.space";
+export const BASE_URL = "https://api.annakin.students.nomoreparties.space";
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -13,17 +13,14 @@ export const register = (email, password) => {
   })
     .then((res) => {
       try {
-        console.log(res);
         if(res.status === 200) {
           return res.json();
         }
       } catch(err) {
-        console.log('err',err);
         return err;
       }
     })
     .then((res) => {
-      console.log('json',res);
       return res;
     });
 }

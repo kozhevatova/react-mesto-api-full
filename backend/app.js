@@ -41,6 +41,13 @@ app.use(bodyParser.json());
 // логгер запросов
 app.use(requestLogger);
 
+// краш тест
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 // роуты
 app.post('/signin', celebrate({
   body: Joi.object().keys({
