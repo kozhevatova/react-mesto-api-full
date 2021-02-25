@@ -4,7 +4,6 @@ const User = require('../models/user');
 const NotAuthorizedError = require('../errors/not-auth-err');
 const BadRequestError = require('../errors/bad-req-err');
 const NotFoundError = require('../errors/not-found-err');
-const NotUniqueEmailError = require('../errors/not-unique-email-err');
 
 const handleError = (err) => {
   if (err.name === 'ValidationError' || err.name === 'CastError') {
