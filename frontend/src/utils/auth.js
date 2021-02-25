@@ -4,14 +4,24 @@ export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
+      "Accept": "application/json",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      "email": email,
-      "password": password
+     email, password
     })
   })
-    .then((res) => res.json())
+    .then((res) => {
+      try {
+        console.log(res);
+        if(res.status === 200) {
+          return res.json();
+        }
+      } catch(err) {
+        console.log('err',err);
+        return err;
+      }
+    })
     .then((res) => {
       console.log('json',res);
       return res;

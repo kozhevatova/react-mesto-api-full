@@ -21,19 +21,19 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-const options = {
-  origin: '*',
-  // 'http://localhost:3000',
-  // 'http://annakin.students.nomoreparties.space',
-  // 'https://annakin.students.nomoreparties.space',
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'origin', 'Authorization', 'authorization'],
-  credentials: true,
-};
-app.use('*', cors(options));
-// app.use(cors());
+// const options = {
+//   origin: '*',
+//   // 'http://localhost:3000',
+//   // 'http://annakin.students.nomoreparties.space',
+//   // 'https://annakin.students.nomoreparties.space',
+//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+//   allowedHeaders: ['Content-Type', 'origin', 'Authorization', 'authorization'],
+//   credentials: true,
+// };
+// app.use('*', cors(options));
+app.use(cors());
 
 app.use(helmet());
 app.use(bodyParser.json());
@@ -51,9 +51,9 @@ app.post('/signin', celebrate({
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
-    // name: Joi.string().min(2).max(40),
-    // about: Joi.string().min(2).max(200),
-    // avatar: Joi.string(),
+    name: Joi.string().min(2).max(40),
+    about: Joi.string().min(2).max(200),
+    avatar: Joi.string(),
     email: Joi.string().required(),
     password: Joi.string().required().min(8),
   }),
