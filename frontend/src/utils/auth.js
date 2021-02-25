@@ -20,8 +20,10 @@ export const authorize = (email, password) => {
   console.log('auth front', email);
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    mode: 'cors',
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "http://annakin.students.nomoreparties.space"
     },
     body: JSON.stringify({
       "email": email,
