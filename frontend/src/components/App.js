@@ -92,7 +92,7 @@ function App() {
     api.addNewCard(newPlace.name, newPlace.link, jwt)
       .then((newPlace) => {
         console.log(newPlace);
-        setCards([newPlace.data, ...cards]);
+        setCards([newPlace, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {
