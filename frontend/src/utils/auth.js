@@ -1,6 +1,7 @@
 export const BASE_URL = "https://api.annakin.students.nomoreparties.space";
 
 export const register = (email, password) => {
+  console.log('register front', email);
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
@@ -16,6 +17,7 @@ export const register = (email, password) => {
 }
 
 export const authorize = (email, password) => {
+  console.log('auth front', email);
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
@@ -28,6 +30,7 @@ export const authorize = (email, password) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log('auth front data');
       if (data.token) {
         localStorage.setItem('jwt', data.token);
         return data;
@@ -36,6 +39,7 @@ export const authorize = (email, password) => {
 }
 
 export const checkToken = (token) => {
+  console.log('check token front', token)
   return fetch(`${BASE_URL}/users/me`,{
     method: 'GET',
     headers: {

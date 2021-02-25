@@ -81,6 +81,7 @@ module.exports.getUserInfo = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
+  console.log('login back', email);
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // создание токена

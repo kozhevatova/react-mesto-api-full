@@ -3,6 +3,7 @@ const NotAuthorizedError = require('../errors/not-auth-err');
 
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
+  console.log('auth back');
   // авторизационный заголовок
   const { authorization } = req.headers;
 
