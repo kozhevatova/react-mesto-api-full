@@ -60,7 +60,7 @@ class Api {
   }
 
   _addLike(cardId, jwt) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       headers: {
         authorization: `Bearer ${jwt}`,
         'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ class Api {
   }
 
   _deleteLike(cardId, jwt) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       headers: {
         authorization: `Bearer ${jwt}`,
         'Content-Type': 'application/json'
