@@ -8,8 +8,8 @@ export const register = (email, password) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
+      "email": email,
       "password": password,
-      "email": email
     })
   })
     .then((res) => res.json())
@@ -20,10 +20,8 @@ export const authorize = (email, password) => {
   console.log('auth front', email);
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
-    mode: 'cors',
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://annakin.students.nomoreparties.space"
     },
     body: JSON.stringify({
       "email": email,
