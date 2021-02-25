@@ -30,7 +30,7 @@ const Register = ({ handleRegisterOpen, handleRegister }) => {
   return (
     <div className="login login_type_register">
       <h2 className="login__title">Регистрация</h2>
-      <form className="login__form" onSubmit={handleSubmit}>
+      <form className="login__form" method="POST" onSubmit={handleSubmit}>
         <input className="login__input login__email" type="email" name="loginEmail" placeholder="Email"
           required id="email-input" value={email} onChange={handleInputChange}
           pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[a-z]{2,})\b"

@@ -51,9 +51,9 @@ app.post('/signin', celebrate({
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(40),
-    about: Joi.string().min(2).max(200),
-    avatar: Joi.string(),
+    // name: Joi.string().min(2).max(40),
+    // about: Joi.string().min(2).max(200),
+    // avatar: Joi.string(),
     email: Joi.string().required(),
     password: Joi.string().required().min(8),
   }),

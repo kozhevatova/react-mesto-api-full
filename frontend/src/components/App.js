@@ -279,7 +279,6 @@ function App() {
         } else {
           setIsInfoPopupOpen(true);
           setIsRegisterValid(false);
-          console.log('Error');
         }
       })
       .catch((err) => {
