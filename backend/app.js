@@ -66,13 +66,11 @@ app.use('/users', celebrate({
   }).unknown(true),
 }), auth, routerUsers);
 
-app.use('/cards',
-// celebrate({
-//   headers: Joi.object().keys({
-//     authorization: Joi.string().required(),
-//   }).unknown(true),
-// }),
- auth, routeCards);
+app.use('/cards', celebrate({
+  headers: Joi.object().keys({
+    authorization: Joi.string().required(),
+  }).unknown(true),
+}), auth, routeCards);
 
 app.use((req, res) => {
   res.status(404).send({ message: `Запрашиваемый ресурс ${req.path} не найден` });
