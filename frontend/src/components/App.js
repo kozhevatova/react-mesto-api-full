@@ -52,8 +52,8 @@ function App() {
     ])
       .then((values) => {
         const [userInfo, initialCards] = values;
-        setCurrentUser(userInfo.data);
-        setCards(initialCards.data);
+        setCurrentUser(userInfo);
+        setCards(initialCards);
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +71,7 @@ function App() {
         auth.checkToken(jwt)
           .then((res) => {
             if (res) {
-              setCurrentEmail(res.data.email);
+              setCurrentEmail(res.email);
               setIsLoggedIn(true);
               history.push('/');
             }
