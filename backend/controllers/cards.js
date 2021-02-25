@@ -16,7 +16,7 @@ const handleIdNotFound = () => {
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -24,7 +24,7 @@ module.exports.getCards = (req, res, next) => {
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -38,7 +38,7 @@ module.exports.deleteCard = (req, res, next) => {
         throw new NotAllowedError('Нет прав на удаление карточки');
       }
       Card.findByIdAndRemove(req.params.cardId)
-        .then((deletedCard) => res.send({ data: deletedCard }))
+        .then((deletedCard) => res.send(deletedCard))
         .catch((err) => handleError(err))
         .catch(next);
     })
@@ -50,7 +50,7 @@ module.exports.addLike = (req, res, next) => {
     new: true,
   })
     .orFail(() => handleIdNotFound())
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -60,7 +60,7 @@ module.exports.removeLike = (req, res, next) => {
     new: true,
   })
     .orFail(() => handleIdNotFound())
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => handleError(err))
     .catch(next);
 };

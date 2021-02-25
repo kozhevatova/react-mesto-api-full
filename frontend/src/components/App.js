@@ -46,13 +46,14 @@ function App() {
   useEffect(() => {
     setIsLoading(true);
     const jwt = localStorage.getItem('jwt');
-    Promise.all([
+    if(isLoggedIn) {Promise.all([
       api.getUserInfo(jwt),
       api.getInitialCards(jwt)
     ])
       .then((values) => {
         const [userInfo, initialCards] = values;
         setCurrentUser(userInfo);
+        console.log(initialCards);
         setCards(initialCards);
       })
       .catch((err) => {
@@ -60,8 +61,9 @@ function App() {
       })
       .finally(() => {
         setIsLoading(false);
-      });
-  }, []);
+      });}
+    
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const handleTokenCheck = () => {
@@ -69,8 +71,8 @@ function App() {
         const jwt = localStorage.getItem('jwt');
         auth.checkToken(jwt)
           .then((res) => {
-            setCurrentEmail(res.data.email);
             if (res) {
+              setCurrentEmail(res.data.email);
               setIsLoggedIn(true);
               history.push('/');
             }

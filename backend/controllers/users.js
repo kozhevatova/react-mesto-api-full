@@ -17,7 +17,7 @@ const handleIdNotFound = () => {
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -26,7 +26,7 @@ module.exports.getUserById = (req, res, next) => {
   // if (req.params.userId !== 'me') {
   User.findById(req.params.userId)
     .orFail(() => handleIdNotFound())
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -42,7 +42,7 @@ module.exports.createUser = (req, res, next) => {
         name, about, avatar, email, password: hash,
       });
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -54,7 +54,7 @@ module.exports.updateProfile = (req, res, next) => {
     runValidators: true,
   })
     .orFail(() => handleIdNotFound())
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -66,7 +66,7 @@ module.exports.updateAvatar = (req, res, next) => {
     runValidators: true,
   })
     .orFail(() => handleIdNotFound())
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => handleError(err))
     .catch(next);
 };
@@ -74,7 +74,7 @@ module.exports.updateAvatar = (req, res, next) => {
 module.exports.getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(() => handleIdNotFound())
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => handleError(err))
     .catch(next);
 };
