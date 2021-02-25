@@ -5,7 +5,9 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
     const currentUser = useContext(CurrentUserContext);
 
     //определение является ли текущий пользователь владельцем карточки
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner === currentUser._id;
+    console.log('card',card);
+    console.log('user',currentUser);
     const cardDeleteButtonClassName = (
         `element__delete-button ${isOwn ?
             'element__delete-button_visible' :

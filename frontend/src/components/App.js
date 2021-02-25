@@ -52,9 +52,8 @@ function App() {
     ])
       .then((values) => {
         const [userInfo, initialCards] = values;
-        setCurrentUser(userInfo);
-        console.log(initialCards);
-        setCards(initialCards);
+        setCurrentUser(userInfo.data);
+        setCards(initialCards.data);
       })
       .catch((err) => {
         console.log(err);
@@ -92,7 +91,8 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     api.addNewCard(newPlace.name, newPlace.link, jwt)
       .then((newPlace) => {
-        setCards([newPlace, ...cards]);
+        console.log(newPlace);
+        setCards([newPlace.data, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {

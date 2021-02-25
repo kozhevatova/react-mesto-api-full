@@ -67,7 +67,9 @@ class Api {
       },
       method: 'PUT',
     })
-      .then((res) => this._getResponseData(res));
+      .then((res) => {
+        console.log(res);
+        return this._getResponseData(res)});
   }
 
   _deleteLike(cardId, jwt) {
