@@ -40,7 +40,7 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => User.create({
       name, about, avatar, email, password: hash,
     }))
-    .then(({ _id }) => User.findById(_id).select())
+    .then(({ _id }) => User.findById(_id))
     .then((user) => res.send(user))
     .catch((err) => handleError(err))
     .catch(next);
