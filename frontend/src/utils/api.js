@@ -89,7 +89,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://api.annakin.students.nomoreparties.space/',
+  baseUrl: 'http://api.annakin.students.nomoreparties.space',
   headers: {
     // authorization: 'b1b736c3-ab37-40d8-99c3-eedcbb719e9d',
     'Content-Type': 'application/json'
