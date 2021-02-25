@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 const options = {
   origin: [
-    'http://localhost:3000',
+    // 'http://localhost:3000',
     'http://annakin.students.nomoreparties.space/',
     'https://annakin.students.nomoreparties.space/',
   ],
@@ -35,7 +35,7 @@ const options = {
 };
 app.use('*', cors(options));
 
-// app.use(helmet());
+app.use(helmet());
 app.use(bodyParser.json());
 
 // логгер запросов
