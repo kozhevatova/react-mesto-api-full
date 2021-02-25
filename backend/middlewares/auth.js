@@ -5,7 +5,7 @@ const NotAuthorizedError = require('../errors/not-auth-err');
 module.exports = (req, res, next) => {
   // авторизационный заголовок
   const { authorization } = req.headers;
-
+  console.log('auth back');
   if (!authorization || !authorization.startsWith('Bearer ')) {
     throw new NotAuthorizedError('Необходима авторизация');
   }
@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(token,
       '458fdd9a582f800b69253066e06b58229d2361b70d5b1e61f59fcf6a03066089');
+    console.log('auth back token', token);
   } catch (err) {
     throw new NotAuthorizedError(err.message);
   }
