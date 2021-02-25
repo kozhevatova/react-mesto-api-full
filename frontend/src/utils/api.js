@@ -67,9 +67,7 @@ class Api {
       },
       method: 'PUT',
     })
-      .then((res) => {
-        console.log(res);
-        return this._getResponseData(res)});
+      .then((res) => this._getResponseData(res));
   }
 
   _deleteLike(cardId, jwt) {
@@ -83,8 +81,8 @@ class Api {
       .then((res) => this._getResponseData(res));
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
-    return isLiked ? this._addLike(cardId) : this._deleteLike(cardId);
+  changeLikeCardStatus(cardId, isLiked, jwt) {
+    return isLiked ? this._addLike(cardId,jwt) : this._deleteLike(cardId,jwt);
   }
 
   deleteCard(cardId, jwt) {

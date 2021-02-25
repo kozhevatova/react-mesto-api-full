@@ -16,7 +16,19 @@ const handleIdNotFound = () => {
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send(cards))
+    .then((cards) => {
+      const newCards = cards.sort((newCard, oldCard) => {
+        if (newCard.createdAt > oldCard.createdAt) {
+          return 1;
+        }
+        if (newCard.createdAt < oldCard.createdAt) {
+          return -1;
+        }
+        return 0;
+      });
+      // res.send(cards);
+      res.send(newCards);
+    })
     .catch((err) => handleError(err))
     .catch(next);
 };

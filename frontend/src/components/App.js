@@ -46,7 +46,8 @@ function App() {
   useEffect(() => {
     setIsLoading(true);
     const jwt = localStorage.getItem('jwt');
-    if(isLoggedIn) {Promise.all([
+    if(isLoggedIn) {
+      Promise.all([
       api.getUserInfo(jwt),
       api.getInitialCards(jwt)
     ])
@@ -60,8 +61,8 @@ function App() {
       })
       .finally(() => {
         setIsLoading(false);
-      });}
-    
+      });
+    }
   }, [isLoggedIn]);
 
   useEffect(() => {
@@ -91,7 +92,6 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     api.addNewCard(newPlace.name, newPlace.link, jwt)
       .then((newPlace) => {
-        console.log(newPlace);
         setCards([newPlace, ...cards]);
         closeAllPopups();
       })
@@ -108,7 +108,7 @@ function App() {
     const jwt = localStorage.getItem('jwt');
 
     //определение есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     //отправка запроса в API и получение обновленных данных карточки
     api.changeLikeCardStatus(card._id, !isLiked, jwt)

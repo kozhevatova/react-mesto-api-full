@@ -81,13 +81,11 @@ module.exports.getUserInfo = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  console.log('login back', email);
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // создание токена
       const token = jwt.sign({ _id: user._id },
         '458fdd9a582f800b69253066e06b58229d2361b70d5b1e61f59fcf6a03066089');
-      console.log('ligin token back', token);
       res.send({ token });
     })
     .catch((err) => {
