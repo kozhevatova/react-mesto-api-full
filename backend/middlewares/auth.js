@@ -12,9 +12,10 @@ module.exports = (req, res, next) => {
 
   // верификация токена
   let payload;
+  const { NODE_ENV, JWT_SECRET } = process.env;
   try {
     payload = jwt.verify(token,
-      '458fdd9a582f800b69253066e06b58229d2361b70d5b1e61f59fcf6a03066089');
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     throw new NotAuthorizedError(err.message);
   }
