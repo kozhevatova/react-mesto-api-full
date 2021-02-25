@@ -30,7 +30,7 @@ export const authorize = (email, password) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log('auth front data');
+      console.log('auth front data', data);
       if (data.token) {
         localStorage.setItem('jwt', data.token);
         return data;
