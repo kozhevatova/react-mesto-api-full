@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.annakin.students.nomoreparties.space";
+export const BASE_URL = "http://api.annakin.students.nomoreparties.space";
 
 export const register = (email, password) => {
   console.log('register front', email);
