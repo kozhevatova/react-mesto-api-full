@@ -21,20 +21,20 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-// const options = {
-//   origin: [
-//     'http://localhost:3000',
-//     'http://annakin.students.nomoreparties.space',
-//     'https://annakin.students.nomoreparties.space',
-//   ],
-//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-//   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
-//   credentials: true,
-// };
-// app.use('*', cors(options));
-app.use(cors());
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'http://annakin.students.nomoreparties.space',
+    'https://annakin.students.nomoreparties.space',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  credentials: true,
+};
+app.use('*', cors(options));
+// app.use(cors());
 
 app.use(helmet());
 app.use(bodyParser.json());

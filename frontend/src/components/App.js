@@ -45,9 +45,10 @@ function App() {
   //получение данных о пользователе с сервера и присвоение этих данных контексту
   useEffect(() => {
     setIsLoading(true);
+    const jwt = localStorage.getItem('jwt');
     Promise.all([
-      api.getUserInfo(),
-      api.getInitialCards()
+      api.getUserInfo(jwt),
+      api.getInitialCards(jwt)
     ])
       .then((values) => {
         const [userInfo, initialCards] = values;
@@ -86,7 +87,8 @@ function App() {
   //добавление карточки
   const handleAddPlace = (newPlace) => {
     setIsLoading(true);
-    api.addNewCard(newPlace.name, newPlace.link)
+    const jwt = localStorage.getItem('jwt');
+    api.addNewCard(newPlace.name, newPlace.link, jwt)
       .then((newPlace) => {
         setCards([newPlace, ...cards]);
         closeAllPopups();
@@ -101,11 +103,13 @@ function App() {
 
   //лайк
   const handleCardLike = (card) => {
+    const jwt = localStorage.getItem('jwt');
+
     //определение есть ли у карточки лайк, поставленный текущим пользователем
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     //отправка запроса в API и получение обновленных данных карточки
-    api.changeLikeCardStatus(card._id, !isLiked)
+    api.changeLikeCardStatus(card._id, !isLiked, jwt)
       .then((newCard) => {
         //формирование нового массива на основе имеющегося, 
         //поставляя в него новую карточку
@@ -120,7 +124,8 @@ function App() {
   //удаление карточки
   const handleCardDelete = (card) => {
     setIsLoading(true);
-    api.deleteCard(card._id)
+    const jwt = localStorage.getItem('jwt');
+    api.deleteCard(card._id, jwt)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== card._id);
         setCards(newCards);
@@ -210,7 +215,8 @@ function App() {
   //обработчик обновления инфы пользователя
   const handleUpdateUser = (info) => {
     setIsLoading(true);
-    api.setUserInfo(info.name, info.about)
+    const jwt = localStorage.getItem('jwt');
+    api.setUserInfo(info.name, info.about, jwt)
       .then((info) => {
         setCurrentUser(info);
         closeAllPopups();
@@ -226,7 +232,8 @@ function App() {
   //обработчик обновления аватара
   const handleUpdateAvatar = (newAvatar) => {
     setIsLoading(true);
-    api.editAvatar(newAvatar.avatar)
+    const jwt = localStorage.getItem('jwt');
+    api.editAvatar(newAvatar.avatar, jwt)
       .then((newAvatar) => {
         setCurrentUser(newAvatar);
         closeAllPopups();
@@ -288,21 +295,6 @@ function App() {
   const handleRegisterOpen = () => {
     setIsRegisterOpen(!isRegisterOpen);
   }
-
-  // const handleTokenCheck = () => {
-  //   if (localStorage.getItem('jwt')) {
-  //     const jwt = localStorage.getItem('jwt');
-  //     auth.checkToken(jwt)
-  //       .then((res) => {
-  //         setCurrentEmail(res.data.email);
-  //         if (res) {
-  //           setIsLoggedIn(true);
-  //           history.push('/');
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }
 
   //#endregion
 

@@ -1,7 +1,6 @@
 class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
-    this.headers = options.headers;
   }
 
   _getResponseData(res) {
@@ -11,22 +10,31 @@ class Api {
     return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
-  getInitialCards() {
+  getInitialCards(jwt) {
     return fetch(`${this.baseUrl}/cards`, {
-      headers: this.headers
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      }
     }).then((res) => this._getResponseData(res));
   }
 
-  getUserInfo() {
+  getUserInfo(jwt) {
     return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      }
     })
       .then((res) => this._getResponseData(res));
   }
 
-  setUserInfo(newName, newInfo) {
+  setUserInfo(newName, newInfo, jwt) {
     return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
       method: 'PATCH',
       body: JSON.stringify({
         name: newName,
@@ -36,9 +44,12 @@ class Api {
       .then((res) => this._getResponseData(res));
   }
 
-  addNewCard(name, link) {
+  addNewCard(name, link, jwt) {
     return fetch(`${this.baseUrl}/cards`, {
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
       method: 'POST',
       body: JSON.stringify({
         name: name,
@@ -48,17 +59,23 @@ class Api {
       .then((res) => this._getResponseData(res));
   }
 
-  _addLike(cardId) {
+  _addLike(cardId, jwt) {
     return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
       method: 'PUT',
     })
       .then((res) => this._getResponseData(res));
   }
 
-  _deleteLike(cardId) {
+  _deleteLike(cardId, jwt) {
     return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
       method: 'DELETE',
     })
       .then((res) => this._getResponseData(res));
@@ -68,17 +85,23 @@ class Api {
     return isLiked ? this._addLike(cardId) : this._deleteLike(cardId);
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, jwt) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
       method: 'DELETE',
     })
       .then((res) => this._getResponseData(res));
   }
 
-  editAvatar(avatar) {
+  editAvatar(avatar, jwt) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
-      headers: this.headers,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
       method: 'PATCH',
       body: JSON.stringify({
         avatar: avatar
@@ -90,10 +113,6 @@ class Api {
 
 const api = new Api({
   baseUrl: 'http://api.annakin.students.nomoreparties.space',
-  headers: {
-    // authorization: 'b1b736c3-ab37-40d8-99c3-eedcbb719e9d',
-    'Content-Type': 'application/json'
-  }
 });
 
 export default api;
