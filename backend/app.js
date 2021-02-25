@@ -35,7 +35,7 @@ const options = {
 };
 app.use('*', cors(options));
 
-app.use(helmet());
+// app.use(helmet());
 app.use(bodyParser.json());
 
 // логгер запросов
