@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
@@ -21,19 +21,19 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
 });
 
-// const options = {
-//   origin: [
-//     'http://localhost:3000',
-//     'http://annakin.students.nomoreparties.space',
-//     'https://annakin.students.nomoreparties.space',
-//   ],
-//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-//   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
-//   credentials: true,
-// };
-// app.use('*', cors(options));
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'http://annakin.students.nomoreparties.space',
+    'https://annakin.students.nomoreparties.space',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  credentials: true,
+};
+app.use('*', cors(options));
 
 app.use(helmet());
 app.use(bodyParser.json());
