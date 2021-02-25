@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const config = require('dotenv').config({ path: './env' });
 const express = require('express');
 const mongoose = require('mongoose');

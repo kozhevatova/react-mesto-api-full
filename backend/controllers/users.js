@@ -4,6 +4,7 @@ const User = require('../models/user');
 const NotAuthorizedError = require('../errors/not-auth-err');
 const BadRequestError = require('../errors/bad-req-err');
 const NotFoundError = require('../errors/not-found-err');
+const NotUniqueEmailError = require('../errors/not-unique-email-err');
 
 const handleError = (err) => {
   if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -36,14 +37,31 @@ module.exports.createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
 
-  bcrypt.hash(password, 10)
-    .then((hash) => User.create({
-      name, about, avatar, email, password: hash,
-    }))
-    .then(({ _id }) => User.findById(_id))
-    .then((user) => res.send(user))
+  User.findOne({ email }).then((user) => {
+    if (user) {
+      throw new NotUniqueEmailError('Такая почта уже используется');
+    }
+  }).then(() => {
+    bcrypt.hash(password, 10)
+      .then((hash) => User.create({
+        name, about, avatar, email, password: hash,
+      }))
+      .then(({ _id }) => User.findById(_id))
+      .then((user) => res.send(user))
+      .catch((err) => handleError(err));
+    // .catch(next);
+  })
     .catch((err) => handleError(err))
     .catch(next);
+
+  // bcrypt.hash(password, 10)
+  //   .then((hash) => User.create({
+  //     name, about, avatar, email, password: hash,
+  //   }))
+  //   .then(({ _id }) => User.findById(_id))
+  //   .then((user) => res.send(user))
+  //   .catch((err) => handleError(err))
+  //   .catch(next);
 };
 
 module.exports.updateProfile = (req, res, next) => {
