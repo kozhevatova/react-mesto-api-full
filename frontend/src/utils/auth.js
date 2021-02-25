@@ -8,8 +8,8 @@ export const register = (email, password) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      "email": email,
       "password": password,
+      "email": email,
     })
   })
     .then((res) => res.json())
@@ -24,8 +24,8 @@ export const authorize = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      "password": password,
       "email": email,
-      "password": password
     })
   })
     .then((res) => res.json())
