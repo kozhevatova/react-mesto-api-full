@@ -83,8 +83,11 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // создание токена
+      const { NODE_ENV, JWT_SECRET } = process.env;
       const token = jwt.sign({ _id: user._id },
-        '458fdd9a582f800b69253066e06b58229d2361b70d5b1e61f59fcf6a03066089');
+        // '458fdd9a582f800b69253066e06b58229d2361b70d5b1e61f59fcf6a03066089',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' });
       res.send({ token });
     })
     .catch((err) => {
