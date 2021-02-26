@@ -4,3 +4,4 @@
 * Публичный IP: 84.201.132.117
 
 * [Ссылкa на сайт, размещенный на Яндекс.Облаке](https://annakin.students.nomoreparties.space)
+* [Ссылкa на api, размещенный на Яндекс.Облаке](https://api.annakin.students.nomoreparties.space)

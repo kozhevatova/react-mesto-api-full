@@ -4,8 +4,12 @@ const User = require('../models/user');
 const NotAuthorizedError = require('../errors/not-auth-err');
 const BadRequestError = require('../errors/bad-req-err');
 const NotFoundError = require('../errors/not-found-err');
+const NotUniqueEmailError = require('../errors/not-unique-email-err');
 
 const handleError = (err) => {
+  if (err.name === 'MongoError') {
+    throw new NotUniqueEmailError('Указанная почта уже используется');
+  }
   if (err.name === 'ValidationError' || err.name === 'CastError') {
     throw new BadRequestError(err.message);
   }
@@ -23,11 +27,14 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getUserById = (req, res, next) => {
-  // if (req.params.userId !== 'me') {
   User.findById(req.params.userId)
     .orFail(() => handleIdNotFound())
-    .then((user) => res.send(user))
-    .catch((err) => handleError(err))
+    .then(({ _id }) => {
+      User.findById(_id)
+        .then((user) => res.send(user))
+        .catch((err) => handleError(err))
+        .catch(next);
+    })
     .catch(next);
 };
 

@@ -7,7 +7,6 @@ const handleError = (err) => {
   if (err.name === 'ValidationError' || err.name === 'CastError') {
     throw new BadRequestError(err.message);
   }
-  // return res.status(500).send({ message: err.message });
 };
 
 const handleIdNotFound = () => {
@@ -26,7 +25,6 @@ module.exports.getCards = (req, res, next) => {
         }
         return 0;
       });
-      // res.send(cards);
       res.send(newCards);
     })
     .catch((err) => handleError(err))
@@ -58,21 +56,31 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.addLike = (req, res, next) => {
-  Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user } }, {
-    new: true,
-  })
+  Card.findById(req.params.cardId)
     .orFail(() => handleIdNotFound())
-    .then((card) => res.send(card))
-    .catch((err) => handleError(err))
+    // eslint-disable-next-line no-unused-vars
+    .then((card) => {
+      Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user } }, {
+        new: true,
+      })
+        .then((likedCard) => res.send(likedCard))
+        .catch((err) => handleError(err))
+        .catch(next);
+    })
     .catch(next);
 };
 
 module.exports.removeLike = (req, res, next) => {
-  Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, {
-    new: true,
-  })
+  Card.findById(req.params.cardId)
     .orFail(() => handleIdNotFound())
-    .then((card) => res.send(card))
-    .catch((err) => handleError(err))
+    // eslint-disable-next-line no-unused-vars
+    .then((card) => {
+      Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, {
+        new: true,
+      })
+        .then((dislikedCard) => res.send(dislikedCard))
+        .catch((err) => handleError(err))
+        .catch(next);
+    })
     .catch(next);
 };

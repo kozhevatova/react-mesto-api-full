@@ -12,6 +12,7 @@ const routeCards = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const NotFoundError = require('./errors/not-found-err');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -24,13 +25,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 const options = {
-  origin:
-    // '*',
-    ['http://localhost:3000',
-      'http://annakin.students.nomoreparties.space',
-      'https://annakin.students.nomoreparties.space',
-      'http://www.annakin.students.nomoreparties.space',
-      'https://www.annakin.students.nomoreparties.space'],
+  origin: ['http://localhost:3000',
+    'http://annakin.students.nomoreparties.space',
+    'https://annakin.students.nomoreparties.space',
+    'http://www.annakin.students.nomoreparties.space',
+    'https://www.annakin.students.nomoreparties.space'],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
   optionsSuccessStatus: 204,
@@ -38,7 +37,6 @@ const options = {
   credentials: true,
 };
 app.use('*', cors(options));
-// app.use(cors());
 
 app.use(helmet());
 app.use(bodyParser.json());
@@ -56,7 +54,7 @@ app.get('/crash-test', () => {
 // роуты
 app.post('/signin', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    email: Joi.string().email().required(),
     password: Joi.string().required().min(8),
   }),
 }), login);
@@ -65,8 +63,8 @@ app.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(40),
     about: Joi.string().min(2).max(200),
-    avatar: Joi.string(),
-    email: Joi.string().required(),
+    avatar: Joi.string().regex(/[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}/),
+    email: Joi.string().email().required(),
     password: Joi.string().required().min(8),
   }),
 }), createUser);
@@ -83,8 +81,8 @@ app.use('/cards', celebrate({
   }).unknown(true),
 }), auth, routeCards);
 
-app.use((req, res) => {
-  res.status(404).send({ message: `Запрашиваемый ресурс ${req.path} не найден` });
+app.use((req, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
 
 // логгер ошибок

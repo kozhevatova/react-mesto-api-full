@@ -22,7 +22,9 @@
   "homepage": "https://github.com/kozhevatova/express-mesto#readme",
   "devDependencies": {
     "eslint": "^7.16.0",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -30,8 +32,6 @@
     "celebrate": "^13.0.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "express-winston": "^4.0.5",
     "helmet": "^4.4.1",
